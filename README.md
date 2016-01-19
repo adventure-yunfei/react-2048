@@ -10,6 +10,7 @@ A starter project to embrace incoming es6 js.
 - ESLint tuned to ensure better code style
 - `__assert__` keyword to enable debug check, which is similar to java "assert"
 - CSS/SCSS/SASS styles file requirement support
+- Embed small images as base64 data directly into styles file
 
 # How to use it
 
@@ -30,6 +31,7 @@ Other notes:
 ### [Latest](https://github.com/adventure-yunfei/es6-starter-project/tree/master)
 
 - Add CSS/SCSS/SASS styles file requirement support
+- Add image files requirement support (embedded small images directly as base64 data)
 
 ### [1.0.1](https://github.com/adventure-yunfei/es6-starter-project/compare/1.0.0...1.0.1)
 

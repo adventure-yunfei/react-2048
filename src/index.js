@@ -7,5 +7,7 @@ __assert__(a === b, '"a" should equal to "b"!');
 import './test.css';
 import './test.scss';
 
+// This is an example to require image in js (it may be directly base64 encode string, or just a url)
+import './test.png';
 
 export default 'src main and bundle entry file, change it as you want';

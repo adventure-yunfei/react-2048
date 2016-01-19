@@ -37,6 +37,9 @@ export default function makeWebpackConfig(isDev) {
                 exclude: [/node_modules/],
                 test: /\.s(c|a)ss$/,
                 loader: ExtractTextPlugin.extract('style-loader', 'css-loader!sass-loader')
+            }, {
+                test: /\.(gif|jpg|png|woff|woff2|eot|ttf|svg)(\?v=.+)?$/,
+                loader: 'url?limit=10000' // embed img data if less than 10kb
             }]
         },
         plugins: [
