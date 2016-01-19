@@ -41,10 +41,7 @@ gulp.task('watch-compile-es6', ['compile-es6'], () => {
 /////////////////////////////////////
 // tasks to produce one bundled file
 gulp.task('clean-bundle', () => {
-    const webpackConfig = makeWebpackConfig(isDev);
-    for (let key in webpackConfig.entry) {
-        rimraf.sync(`${BUNDLE_DIR}/${key}*`);
-    }
+    rimraf.sync(`${BUNDLE_DIR}/*`);
 });
 gulp.task('build-bundle', ['clean-bundle'], (done) => {
     webpack(makeWebpackConfig(isDev), (err, stats) => {
