@@ -33,7 +33,7 @@ gulp.task('compile-es6', () => {
         .pipe(gulpBabel())
         .pipe(gulp.dest(ES6_COMPILE_DIR));
 });
-gulp.task('watch-compile-es6', () => {
+gulp.task('watch-compile-es6', ['compile-es6'], () => {
     return gulp.watch(`${SRC_DIR}/**/*.js`, ['compile-es6']);
 });
 
