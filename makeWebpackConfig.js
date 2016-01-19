@@ -1,12 +1,19 @@
+/*eslint-env node */
+import path from 'path';
 import webpack from 'webpack';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import {ROOT, SRC_DIR, BUNDLE_DIR} from './constants';
+
+const BABEL_POLYFILL = path.join(SRC_DIR, 'include-babel-polyfill.js');
 
 export default function makeWebpackConfig(isDev) {
     return {
         context: ROOT,
         entry: {
-            bundle: `${SRC_DIR}/index.js`
+            bundle: [
+                BABEL_POLYFILL, // Include babel polyfill if want to use all es6 features
+                path.join(SRC_DIR, 'index.js')
+            ]
         },
         debug: isDev,
         devtool: isDev ? 'cheap-module-source-map' : '',
