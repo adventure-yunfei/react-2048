@@ -14,7 +14,7 @@ export default function makeWebpackConfig(isDev) {
         output: {
             path: BUNDLE_DIR,
             filename: '[name].js',
-            sourceMapFilename: '[file].[hash].map',
+            //sourceMapFilename: '[file].[hash].map', // include this config if meeting problem that source map is cached on browser
             publicPath: '/build/'
         },
         module: {
