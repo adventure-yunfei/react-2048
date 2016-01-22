@@ -1,3 +1,4 @@
+import path from 'path';
 import gulp from 'gulp';
 import gulpUtil from 'gulp-util';
 import gulpBabel from 'gulp-babel';
@@ -5,6 +6,7 @@ import webpack from 'webpack';
 import yargs from 'yargs';
 import rimraf from 'rimraf';
 import eslint from 'gulp-eslint';
+import fs from 'fs-extra';
 
 import makeWebpackConfig from './makeWebpackConfig';
 import {BUNDLE_DIR, ES6_COMPILE_DIR, SRC_DIR} from './constants';
@@ -13,6 +15,17 @@ const args = yargs
     .alias('d', 'debug')
     .argv;
 const isDev = args.debug; // Debug mode, will produce uncompressed debug bundle, and watch src file changes
+
+/////////////////////////////////////
+// task for set up git hooks
+gulp.task('githooks', function () {
+    fs.readdirSync('githooks').forEach(function (filename) {
+        fs.copySync(
+            path.join('githooks', filename),
+            path.join('.git', 'hooks', path.basename(filename, '.js'))
+        );
+    });
+});
 
 /////////////////////////////////////
 // task for code style
@@ -79,4 +92,6 @@ gulp.task('build-bundle', ['clean-bundle'], (done) => {
     });
 });
 
-gulp.task('default', ['build-bundle', 'clean-es6-output', (isDev ? 'watch-compile-es6' : 'compile-es6')]);
+gulp.task('build', ['build-bundle', 'clean-es6-output', (isDev ? 'watch-compile-es6' : 'compile-es6')]);
+
+gulp.task('default', ['build']);

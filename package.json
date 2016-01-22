@@ -8,8 +8,8 @@
   ],
   "main": "lib/index.js",
   "scripts": {
-    "prepublish": "gulp",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prepublish": "gulp eslint && gulp build",
+    "postinstall": "gulp githooks"
   },
   "repository": {
     "type": "git",
@@ -32,6 +32,7 @@
     "eslint": "^1.10.3",
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.8.5",
+    "fs-extra": "^0.26.4",
     "gulp": "^3.9.0",
     "gulp-babel": "^5.3.0",
     "gulp-eslint": "^1.1.1",
