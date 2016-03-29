@@ -8,8 +8,7 @@
   ],
   "main": "lib/index.js",
   "scripts": {
-    "prepublish": "gulp eslint && gulp build",
-    "postinstall": "gulp githooks"
+    "prepublish": "gulp eslint && gulp build"
   },
   "repository": {
     "type": "git",
