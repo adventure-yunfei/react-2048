@@ -1,0 +1,162 @@
+.Game2048 {
+  $piece-size: 100px;
+  position: relative;
+  text-align: center;
+  width: $piece-size * 4;
+  margin: 0 auto;
+
+  .score {
+    padding: 50px 0 30px;
+    font-size: 24px;
+    text-align: left;
+
+    .score-num {
+      padding-left: 20px;
+      font-size: 32px;
+      color: #FF9966;
+      &.flashing {
+        animation: pulse-more 320ms;
+      }
+    }
+  }
+
+  .game2048-content {
+    position: relative;
+
+    .background-container {
+      .bg-pieces-row {
+        overflow: auto;
+        .piece {
+          box-sizing: border-box;
+          width: $piece-size;
+          height: $piece-size;
+          border: 3px solid #fff;
+          float: left;
+          background: #FFCC99;
+        }
+      }
+    }
+
+    .pieces-container {
+      .piece {
+        $margin: 3px;
+        position: absolute;
+        background: greenyellow;
+        line-height: 100px;
+        text-align: center;
+        font-size: 45px;
+        width: $piece-size - $margin * 2;
+        height: $piece-size - $margin * 2;
+        margin: $margin;
+
+        $transition-duration: 200ms;
+        $animation-enter-duration: 1000ms;
+        $animation-leave-duration: 200ms;
+        z-index: 1;
+        &.piece-leave {
+          z-index: 0;
+          animation-name: directDisappear;
+          animation-duration: $animation-leave-duration;
+        }
+        transition-property: top, left;
+        transition-duration: $transition-duration;
+        animation-fill-mode: both;
+
+        &.piece-enter {
+          animation-name: bounceIn;
+          animation-duration: $animation-enter-duration;
+          &.doubled {
+            animation-name: pulse;
+            animation-duration: 300ms;
+          }
+        }
+
+        animation-duration: $transition-duration;
+        &.bounceIn {
+          animation-duration: 1s;
+        }
+        &.pulse {
+          animation-duration: 300ms;
+        }
+
+        color: #f9f6f2;
+        &.num2 {
+          background: #FF9900;
+        }
+        &.num4 {
+          background: #009999;
+        }
+        &.num8 {
+          background: #99CC33;
+        }
+        &.num16 {
+          background: #FF9966;
+        }
+        &.num32 {
+          background: #66CCCC;
+        }
+        &.num64 {
+          background: #FF6666;
+        }
+        &.num128 {
+          background: #edcf72;
+        }
+        &.num256 {
+          background: #0099CC;
+        }
+        &.num512 {
+          background: #99CC00;
+        }
+        &.num1024 {
+          background: #009933;
+        }
+        &.num2048 {
+          background: #FF0033;
+        }
+      }
+    }
+  }
+}
+
+.Game2048Player {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+@keyframes directDisappear {
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse-more {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(2);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}

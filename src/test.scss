@@ -1,8 +1,0 @@
-.test {
-  .test-content {
-    height: 1px;
-
-    // Following image resource will also be processed by webpack (which is parsed to base64 data cause of its small size)
-    background-image: url('test.png');
-  }
-}
