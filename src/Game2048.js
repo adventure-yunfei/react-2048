@@ -2,7 +2,6 @@ import React, {PropTypes} from 'react';
 import Component from 'react-pure-render/component';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import immutable, {List} from 'immutable';
-import {connect} from 'react-redux';
 import cn from 'classnames';
 import forEach from 'lodash/forEach';
 import mapValues from 'lodash/mapValues';

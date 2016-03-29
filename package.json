@@ -1,7 +1,7 @@
 {
-  "name": "es6-starter-project",
-  "version": "1.0.1",
-  "description": "ES6 starter project, containing webpack builder, gulp babel builder, etc",
+  "name": "react-2048",
+  "version": "1.0.0",
+  "description": "2048 game implemented by React!",
   "files": [
     "lib",
     "bundles"
@@ -29,6 +29,7 @@
     "babel-loader": "^5.4.0",
     "css-loader": "^0.23.1",
     "eslint": "^1.10.3",
+    "eslint-plugin-react": "^4.2.3",
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.8.5",
     "fs-extra": "^0.26.4",
