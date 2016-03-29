@@ -57,7 +57,7 @@
     "material-ui": "^0.15.0-alpha.2",
     "react": "^0.14.7",
     "react-addons-css-transition-group": "^0.14.7",
-    "react-document-event": "0.0.2",
+    "react-document-event": "0.0.3",
     "react-dom": "^0.14.7",
     "react-pure-render": "^1.0.2",
     "react-redux": "^4.4.1",

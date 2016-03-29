@@ -26,7 +26,7 @@ export default function makeWebpackConfig(isDev) {
         },
         module: {
             loaders: [{
-                exclude: [/node_modules\/(?!react-document-event)/],
+                exclude: [/node_modules/],
                 test: /\.js$/,
                 loaders: ['babel', `js-assert/webpack-assert-loader?dev=${isDev ? 'true' : 'false'}`]
             }, {
