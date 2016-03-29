@@ -7,7 +7,7 @@
     "bundles",
     "src"
   ],
-  "main": "lib/index.js",
+  "main": "lib/Game2048.js",
   "scripts": {
     "prepublish": "gulp eslint && gulp build"
   },
