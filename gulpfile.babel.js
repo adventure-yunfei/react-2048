@@ -6,6 +6,7 @@ import webpack from 'webpack';
 import yargs from 'yargs';
 import rimraf from 'rimraf';
 import eslint from 'gulp-eslint';
+import runSequence from 'run-sequence';
 import fs from 'fs-extra';
 
 import makeWebpackConfig from './makeWebpackConfig';
@@ -17,7 +18,7 @@ const args = yargs
 const isDev = args.debug; // Debug mode, will produce uncompressed debug bundle, and watch src file changes
 
 /////////////////////////////////////
-// task for set up git hooks
+// task for set up git hooks under "githooks" folder
 gulp.task('githooks', function () {
     fs.readdirSync('githooks').forEach(function (filename) {
         fs.copySync(
@@ -36,9 +37,10 @@ gulp.task('eslint', () => {
         .pipe(eslint.failAfterError());
 });
 
+
 /////////////////////////////////////
-// tasks to compile es6 to es5 code
-gulp.task('clean-es6-output', () => {
+// tasks to compile es6 to es5 code, and copy other resources
+gulp.task('clean-lib-output', () => {
     rimraf.sync(`${ES6_COMPILE_DIR}/*`);
 });
 gulp.task('compile-es6', () => {
@@ -49,7 +51,13 @@ gulp.task('compile-es6', () => {
 gulp.task('watch-compile-es6', ['compile-es6'], () => {
     return gulp.watch(`${SRC_DIR}/**/*.js`, ['compile-es6']);
 });
-
+gulp.task('copy-resources', () => {
+    return gulp.src([`${SRC_DIR}/**`, `!${SRC_DIR}/**/*.js`])
+        .pipe(gulp.dest(ES6_COMPILE_DIR));
+});
+gulp.task('watch-copy-resources', ['copy-resources'], () => {
+    return gulp.watch([`${SRC_DIR}/**`, `!${SRC_DIR}/**/*.js`], ['copy-resources']);
+});
 
 /////////////////////////////////////
 // tasks to produce one bundled file
@@ -92,6 +100,14 @@ gulp.task('build-bundle', ['clean-bundle'], (done) => {
     });
 });
 
-gulp.task('build', ['build-bundle', 'clean-es6-output', (isDev ? 'watch-compile-es6' : 'compile-es6')]);
+gulp.task('build', done => {
+    runSequence(
+        'clean-lib-output',
+        isDev ? 'watch-compile-es6' : 'compile-es6',
+        isDev ? 'watch-copy-resources' : 'copy-resources',
+        'build-bundle',
+        done
+    );
+});
 
 gulp.task('default', ['build']);
