@@ -4,11 +4,11 @@
   "description": "2048 game implemented by React!",
   "files": [
     "lib",
-    "bundles"
+    "bundles",
+    "src"
   ],
   "main": "lib/index.js",
   "scripts": {
-    "preinstall": "gulp build",
     "prepublish": "gulp eslint && gulp build"
   },
   "repository": {

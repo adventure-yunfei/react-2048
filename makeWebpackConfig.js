@@ -10,7 +10,7 @@ export default function makeWebpackConfig(isDev) {
     return {
         context: ROOT,
         entry: {
-            bundle: [
+            'app-main': [
                 BABEL_POLYFILL, // Include babel polyfill if want to use all es6 features
                 path.join(SRC_DIR, 'app-main.js')
             ]
