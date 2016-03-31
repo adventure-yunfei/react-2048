@@ -12,7 +12,7 @@ Tha's it! Actually you only need three files: `bundles/app-main.js`, `bundles/ap
 ### - Include in another project as package
 
 1. In your own project, install it as package dependency by `npm install git+ssh://git@github.com:adventure-yunfei/react-2048.git --save`
-2. react-2048 uses [redux](https://github.com/reactjs/redux/) flow, so include its redux reducer and connect props to it:
+2. react-2048 uses [redux](https://github.com/reactjs/redux/) flow with [immutable](https://github.com/facebook/immutable-js/) store, so include its redux reducer and connect props to it:
 
 ```javascript
 // in root reducer.js (here we put it on root reducer but you can put it anywhere, as long as you later "connect" proper state part to React2048 component)
