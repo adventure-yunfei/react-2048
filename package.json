@@ -9,7 +9,7 @@
   ],
   "main": "lib/Game2048.js",
   "scripts": {
-    "prepublish": "gulp eslint && gulp build"
+    "build": "gulp eslint && gulp build"
   },
   "repository": {
     "type": "git",
