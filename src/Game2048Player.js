@@ -74,13 +74,16 @@ export default class Game2048Player extends Component {
             newAutoPlayOn = !this.state.autoPlayOn;
         const calculateAndPlay = () => {
             if (this.state.autoPlayOn) {
-                this.props.game2048.move(this.calculateNextMove({
+                const nextMove = this.calculateNextMove({
                     pieces: game2048.props.pieces,
                     score: game2048.props.score,
                     size: game2048.size,
                     forPlayer: true
-                }));
-                window.setTimeout(calculateAndPlay, 300);
+                });
+                if (nextMove) {
+                    this.props.game2048.move(nextMove);
+                    window.setTimeout(calculateAndPlay, 300);
+                }
             }
         };
         this.setState({
