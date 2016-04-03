@@ -9,6 +9,15 @@ import * as minimaxAlphaBetaPruning from './algorithm/minimax_alpha-beta-pruning
 
 const MOVES = ['u', 'r', 'd', 'l'];
 
+const countTime = func => {
+    const startTime = Date.now(),
+        result = func();
+    return {
+        result,
+        time: (Date.now() - startTime) / 1000
+    };
+};
+
 export default class Game2048Player extends Component {
     static propTypes = {
         game2048: PropTypes.object.isRequired
@@ -58,14 +67,22 @@ export default class Game2048Player extends Component {
                 }
             };
 
-        return minimaxAlphaBetaPruning.calculateNextMove({
+        const {result, time} = countTime(() => minimaxAlphaBetaPruning.calculateNextMove({
             isFirstPlayer: forPlayer,
             stepsToConsider: this.calculateSteps,
             getAvailableMoves,
             fnMove,
             score: score,
             status: getStatus(pieces)
-        });
+        }));
+
+        if (time < 0.03) {
+            this.calculateSteps++;
+        } else if (time > 0.8) {
+            this.calculateSteps--;
+        }
+
+        return result;
     }
 
     toggleAutoPlay = () => {

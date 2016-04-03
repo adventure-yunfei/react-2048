@@ -14,11 +14,11 @@ class MinimaxAlphaBetaPruning {
         let bestMove = null;
         if (stepsLeft === 0) {
             return {bestMove: null, alpha: score, beta: score};
-        } else if (stepsLeft > 0) {
+        } else {
             this.getAvailableMoves(isFirstPlayer, status).some(movement => {
                 const moveRes = this.fnMove(isFirstPlayer, movement, score, status && status.clone());
                 if (moveRes) {
-                    const {alpha: newBeta, beta: newAlpha} = this.doCalculate({
+                    const {alpha: subAlpha, beta: subBeta} = this.doCalculate({
                         isFirstPlayer: !isFirstPlayer,
                         stepsLeft: stepsLeft - 1,
                         score: moveRes.score,
@@ -28,35 +28,31 @@ class MinimaxAlphaBetaPruning {
                     });
 
                     if (isFirstPlayer) {
-                        if (newAlpha > alpha) {
+                        if (subBeta > alpha) {
                             // 当前路径产生了玩家更好的解法, 更新玩家选择
-                            alpha = newAlpha;
+                            alpha = subBeta;
                             bestMove = movement;
                         }
-                        if (alpha > beta) {
-                            // 当前路径产生了超出对手已知最优解的选择, 对手不会选择到达这条路, 剪枝剩余选择
+                        if (subBeta >= beta) {
+                            // 当前路径产生了超出对手已知最优解的选择, 或对手无法产生更好的解, 对手不会选择到达这条路, 剪枝剩余选择
                             return true;
                         }
                     } else {
-                        if (newBeta < beta) {
+                        if (subAlpha < beta) {
                             // 当前路径产生了对手更好的解法, 更新对手选择
-                            beta = newBeta;
+                            beta = subAlpha;
                             bestMove = movement;
                         }
-                        if (newBeta < alpha) {
-                            // 当前路径产生了低于玩家已知最优解的选择, 玩家不会选择到达这条路, 剪枝剩余选择
+                        if (subAlpha <= alpha) {
+                            // 当前路径产生了低于玩家已知最优解的选择, 或玩家无法产生更好的解, 玩家不会选择到达这条路, 剪枝剩余选择
                             return true;
                         }
                     }
                 }
             });
-        }
 
-        return {
-            alpha,
-            beta,
-            bestMove
-        };
+            return {bestMove, alpha, beta};
+        }
     }
 }
 
