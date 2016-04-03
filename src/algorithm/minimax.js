@@ -3,7 +3,7 @@ class Minimax {
      * @return {Array.<*>}*/
     getAvailableMoves = null;
     /**@type {Function}
-     * @return {{score, status}}*/
+     * @return {{score, status} | null} null代表不能移动*/
     fnMove = null;
 
     constructor(props) {

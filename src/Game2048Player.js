@@ -4,7 +4,8 @@ import Paper from 'material-ui/lib/paper';
 import RaisedButton from 'material-ui/lib/raised-button';
 
 import {getNewPiece, getMoveResult, getEmptyPositions} from './Game2048';
-import * as minimax from './algorithm/minimax';
+//import * as minimax from './algorithm/minimax';
+import * as minimaxAlphaBetaPruning from './algorithm/minimax_alpha-beta-pruning';
 
 const MOVES = ['u', 'r', 'd', 'l'];
 
@@ -16,7 +17,7 @@ export default class Game2048Player extends Component {
     /** Step to pre-calculate when the auto-player determines the next movement
      * Consider only the steps of auto-player, so it's (calculateSteps * 2 - 1) total steps for minimax algorithm
      * @type int */
-    calculateSteps = 3;
+    calculateSteps = 5;
 
     state = {
         autoPlayOn: false,
@@ -57,11 +58,9 @@ export default class Game2048Player extends Component {
                 }
             };
 
-
-
-        return minimax.calculateNextMove({
+        return minimaxAlphaBetaPruning.calculateNextMove({
             isFirstPlayer: forPlayer,
-            stepsToConsider: this.calculateSteps * 2 - 1,
+            stepsToConsider: this.calculateSteps,
             getAvailableMoves,
             fnMove,
             score: score,
