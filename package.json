@@ -1,5 +1,6 @@
 {
   "name": "react-2048",
+  "private": true,
   "version": "1.0.0",
   "description": "2048 game implemented by React!",
   "files": [
