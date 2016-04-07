@@ -3,7 +3,7 @@
 Features:
 
 - React implementation
-- AI player by minimax plus alpha-beta pruning algorithm
+- AI player by [minimax plus alpha-beta pruning algorithm](http://blog.yunfei.me/blog/2048AI.html)
 
 
 [Demo](http://react.yunfei.me/2048)
