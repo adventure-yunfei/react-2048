@@ -1,4 +1,12 @@
-# 2048 game implemented by React
+# React 2048 Game
+
+Features:
+
+- React implementation
+- AI player by minimax plus alpha-beta pruning algorithm
+
+
+[Demo](http://react.yunfei.me/2048)
 
 # Run it on your own:
 
@@ -34,5 +42,4 @@ const ConnectedReact2048 = connect(state => ({
 }))(React2048)
 
 ReactDOM.render(ConnectedReact2048, containerNode);
-
 ```
